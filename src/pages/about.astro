@@ -1,25 +1,50 @@
 ---
+import '../styles/global.css';
 
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "About Me";
+
+const identity = {
+    name: "Luis Angel Parra",
+    role: "Software Engineer",
+    location: "Fulda, Germany",
+    hobbies: ["coding", "reading", "traveling"],
+};
+
+const skills = [
+    "JavaScript",
+    "TypeScript",
+    "Astro",
+    "React",
+    "Node.js",
+    "CSS",
+    "HTML",
+];
+
+const happy = true;
+const finished = true;
+const goal = 3;
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
+<BaseLayout pageTitle={pageTitle}>
+    <p>Hello! My name is {identity.name}, and I am a {identity.role} based in {identity.location}.</p>
+    <p>In my free time, I enjoy {identity.hobbies.join(", ")}.</p>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro - About</title>
-	</head>
-	<body>
-        <a href="/">Home</a>
-        <a href="/about/">About me</a>
-        <a href="/blog/">Blog</a>
+    <h3>Skills</h3>
+    <ul>
+        {skills.map((skill) => (
+            <li style={`color: ${skillColor}; font-weight: ${fontWeight}; text-transform: ${textCase};`}>
+                {skill}
+            </li>
+        ))}
+    </ul>
 
-		<h1>About Me</h1>
-		<h2>... ¡And my new Astro Website</h2>
-
-        <p>I'm working on Astro introduction tutorial.</p>
-
-        <p>This site will be updated regularly. Don't forget to check back!</p>
-	</body>
-</html>
+    <h3>Current Status</h3>
+    <p>I am currently {happy ? "happy" : "not happy"} with my progress.</p>
+    <p>Have I finished my learning goal? {finished ? "Yes" : "No"}</p>
+    <p>My current learning goal is to master {goal} new technologies this year.</p>
+</BaseLayout>
