@@ -1,0 +1,36 @@
+---
+interface Props {
+  categories: string[];
+  active: string | null;
+}
+
+const { categories, active } = Astro.props;
+---
+
+<div class="flex items-center gap-4 mt-4 mb-10">
+  <!-- ALL button -->
+  <a
+    href="?category=all"
+    class={`px-4 py-1.5 rounded-full text-sm transition
+      ${active === "all" || !active 
+        ? "bg-zinc-700 text-white" 
+        : "text-zinc-400 hover:text-white hover:bg-zinc-800"}
+    `}
+  >
+    All
+  </a>
+
+  <!-- Other categories -->
+  {categories.map((cat) => (
+    <a
+      href={`?category=${cat}`}
+      class={`px-4 py-1.5 rounded-full text-sm transition
+        ${active === cat
+          ? "bg-zinc-700 text-white"
+          : "text-zinc-400 hover:text-white hover:bg-zinc-800"}
+      `}
+    >
+      {cat}
+    </a>
+  ))}
+</div>

@@ -1,0 +1,23 @@
+---
+interface Props {
+  posts: any[];
+}
+
+const { posts } = Astro.props;
+---
+
+{posts.length === 0 ? (
+  <p class="text-zinc-500 text-sm">No related posts yet.</p>
+) : (
+  <ul class="space-y-6">
+    {posts.map(post => (
+      <li>
+        <a href={`/blog/${post.data.slug}/`}
+           class="block px-4 py-4 border border-zinc-800 rounded-lg hover:bg-zinc-800 transition text-zinc-200">
+          <h3 class="text-lg font-medium text-zinc-100">{post.data.title}</h3>
+          <p class="text-sm text-zinc-400 mt-1">{post.data.summary}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+)}

@@ -1,50 +1,38 @@
 ---
-import '../styles/global.css';
-
-import BaseLayout from '../layouts/BaseLayout.astro';
-
-const pageTitle = "About Me";
-
-const identity = {
-    name: "Luis Angel Parra",
-    role: "Software Engineer",
-    location: "Fulda, Germany",
-    hobbies: ["coding", "reading", "traveling"],
-};
-
-const skills = [
-    "JavaScript",
-    "TypeScript",
-    "Astro",
-    "React",
-    "Node.js",
-    "CSS",
-    "HTML",
-];
-
-const happy = true;
-const finished = true;
-const goal = 3;
-
-const skillColor = "navy";
-const fontWeight = "bold";
-const textCase = "uppercase";
+import H1 from "../components/H1.astro";
+import InfoLayout from "../layouts/InfoLayout.astro";
 ---
-<BaseLayout pageTitle={pageTitle}>
-    <p>Hello! My name is {identity.name}, and I am a {identity.role} based in {identity.location}.</p>
-    <p>In my free time, I enjoy {identity.hobbies.join(", ")}.</p>
 
-    <h3>Skills</h3>
-    <ul>
-        {skills.map((skill) => (
-            <li style={`color: ${skillColor}; font-weight: ${fontWeight}; text-transform: ${textCase};`}>
-                {skill}
-            </li>
-        ))}
-    </ul>
+<InfoLayout>
+     <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh flex flex-col justify-between gap-32">
+          <div class="space-y-4 sm:space-y-12">
+               <H1> Get to know Luisangel </H1>
 
-    <h3>Current Status</h3>
-    <p>I am currently {happy ? "happy" : "not happy"} with my progress.</p>
-    <p>Have I finished my learning goal? {finished ? "Yes" : "No"}</p>
-    <p>My current learning goal is to master {goal} new technologies this year.</p>
-</BaseLayout>
+               <p class="text-xl xl:text-2xl text-zinc-500 text-balance">
+                    I’m
+                    <a href="https://luisangelparra.netlify.app" target="_blank" class="underline underline-offset-4 decoration-zinc-400 hover:text-zinc-50 hover:decoration-zinc-200">
+                         Luisangel Parra
+                    </a>
+                    , a Systems Engineer and technology 
+                    enthusiast focused on building efficient, scalable, and user-centered 
+                    solutions. I combine software development, data science, and automation 
+                    to solve real problems—whether through intelligent applications, process o
+                    ptimization, or clean and modern web interfaces.
+               </p>
+          </div>
+
+          <div class="space-y-2 text-base sm:text-lg">
+               <h2 class="px-4 text-zinc-400 underline underline-offset-4 decoration-zinc-500">Achievements</h2>
+
+               <ul class="px-4 text-zinc-400 list-disc list-outside">
+                    <li>Alternating Current (AC) System</li>
+                    <li>Tesla Coil</li>
+                    <li>Induction Motor</li>
+                    <li>Wireless Transmission</li>
+                    <li>Radio and Remote Control</li>
+                    <li>Hydroelectric Power at Niagara Falls</li>
+                    <li>X-Ray Imaging</li>
+               </ul>
+          </div>
+     </div>
+</InfoLayout>

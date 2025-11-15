@@ -1,0 +1,55 @@
+---
+const { data } = Astro.props;
+---
+
+<div class="space-y-8">
+
+  {data.roles && (
+    <section>
+      <h3 class="text-xs font-semibold text-zinc-400 tracking-wide mb-2 uppercase">
+        Roles
+      </h3>
+      <ul class="text-sm text-zinc-300 space-y-1">
+        {data.roles.map((role : string) => <li>{role}</li>)}
+      </ul>
+    </section>
+  )}
+
+  {data.contributors && (
+    <section>
+      <h3 class="text-xs font-semibold text-zinc-400 tracking-wide mb-2 uppercase">
+        Contributors
+      </h3>
+      <ul class="text-sm text-zinc-300 space-y-1">
+        {data.contributors.map((c : string) => <li>{c}</li>)}
+      </ul>
+    </section>
+  )}
+
+  {data.clients && (
+    <section>
+      <h3 class="text-xs font-semibold text-zinc-400 tracking-wide mb-2 uppercase">
+        Clients
+      </h3>
+      <ul class="text-sm text-zinc-300 space-y-1">
+        {data.clients.map((c : string) => <li>{c}</li>)}
+      </ul>
+    </section>
+  )}
+
+  {data.technologies && (
+    <section>
+      <h3 class="text-xs font-semibold text-zinc-400 tracking-wide mb-2 uppercase">
+        Technologies
+      </h3>
+      <div class="flex flex-wrap gap-2">
+        {data.technologies.map((tech : string) => (
+          <span class="px-2 py-1 bg-zinc-800/80 border border-zinc-700/50 text-xs text-zinc-300 rounded-md">
+            {tech}
+          </span>
+        ))}
+      </div>
+    </section>
+  )}
+
+</div>

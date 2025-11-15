@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import InfoLayout from "../../layouts/InfoLayout.astro";
+import H1 from "../../components/H1.astro";
+import BlogClient from "../../components/blog/BlogClient.tsx";
+
+const posts = (await getCollection("post")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const projects = await getCollection("project");
+---
+
+<InfoLayout>
+  <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
+    <H1>Blog</H1>
+    <BlogClient posts={posts} projects={projects} client:load />
+  </div>
+</InfoLayout>

@@ -1,0 +1,42 @@
+---
+import ProjectImage from "./ProjectImage.astro";
+import ProjectStatusBadge from "./ProjectStatusBadge.astro";
+import ProjectMeta from "./ProjectMeta.astro";
+import ProjectTechnologies from "./ProjectTechnologies.astro";
+import ProjectCTA from "./ProjectCTA.astro";
+
+const { project } = Astro.props;
+const data = project.data;
+
+const mainCategory = data.tags?.[0] || null;
+---
+
+<li class="group bg-zinc-900/40 border border-zinc-800/50 rounded-xl overflow-hidden shadow-md transition duration-300 hover:border-zinc-700 hover:shadow-xl hover:-translate-y-1 backdrop-blur-sm">
+  
+  <div class="relative">
+    <ProjectImage image={data.image} title={data.title} />
+    <ProjectStatusBadge status={data.status} />
+  </div>
+
+  <div class="p-4">
+    <!-- Title -->
+    <h2 class="text-lg font-semibold text-zinc-100 mb-1">{data.title}</h2>
+
+    <!-- Summary -->
+    <p class="text-sm text-zinc-400 line-clamp-3 mb-3">{data.summary}</p>
+
+    <!-- Meta -->
+    <ProjectMeta 
+      startDate={data.startDate} 
+      endDate={data.endDate} 
+      category={mainCategory} 
+    />
+
+    <!-- Technologies -->
+    <ProjectTechnologies technologies={data.technologies} />
+
+    <!-- CTA -->
+    <ProjectCTA slug={data.slug} />
+  </div>
+
+</li>

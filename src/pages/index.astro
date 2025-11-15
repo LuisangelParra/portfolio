@@ -1,9 +1,46 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Greeting from "../components/Greeting";
-const pageTitle = "Homepage";
+import H1 from "../components/H1.astro";
+import Link from "../components/Link.astro";
+import Navigation from "../components/Navigation";
+import RootLayout from "../layouts/RootLayout.astro";
+import WarpBackground from "../components/warp-background";
+import AvailableForWork from "../components/Available.astro";
 ---
-<BaseLayout pageTitle={pageTitle}>
-	<h2>My first blog subtitle</h2>
-	<Greeting client:load messages={["Hej", "Hallo", "Hola", "Habari"]}/>
-</BaseLayout>
+<RootLayout>
+	<main>
+		<div class="group relative w-full min-h-dvh flex items-center justify-center">
+			<div class="absolute w-full h-dvh -z-10">
+				<WarpBackground
+					colors={["#09090b", "#27272a", "#52525b"]}
+					speed={0.6}
+					swirl={0.5}
+					swirlIterations={10}
+					shapeScale={0.3}
+					client:only="react"
+				/>
+			</div>
+			<div class="p-4 sm:p-8 absolute w-full h-dvh flex flex-col justify-between z-10">
+				<div >
+					<H1 size="large"> Luisangel <br /> Parra </H1>
+				</div>
+
+				<div>
+					<AvailableForWork className="py-4" />
+					<div class="mb-2 sm:mb-4 flex items-center justify-between">
+						<div class="flex items-center gap-4">
+							<Link href="#">Book a meet</Link>
+							<Link href="/projects" variant="secondary">View recent work</Link>
+						</div>
+
+						<Navigation client:load>
+							<Link href="/blog" variant="secondary">Blog</Link>
+							<Link href="/about" variant="secondary">About</Link>
+							<Link href="/contact" variant="secondary">Contact</Link>
+						</Navigation>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</main>
+</RootLayout>

@@ -1,0 +1,45 @@
+---
+// src/components/projects/ProjectHero.astro
+import { Image } from "astro:assets";
+
+const { data } = Astro.props;
+const category = data.tags?.[0] ?? null;
+
+const formatYear = (date : Date) => new Date(date).getFullYear();
+const startYear = formatYear(data.startDate);
+const endYear = data.endDate ? formatYear(data.endDate) : null;
+const dateRange = endYear ? `${startYear} – ${endYear}` : `${startYear}`;
+---
+
+<section class="relative mb-8">
+
+  <!-- IMAGE -->
+  <div class="relative rounded-2xl overflow-hidden shadow-lg">
+    <Image
+      src={data.image.url}
+      alt={data.image.alt}
+      width={1600}
+      height={900}
+      class="w-full h-[360px] object-cover"
+    />
+
+    <!-- STATUS BADGE -->
+    <span class="absolute top-4 left-4 bg-black/60 text-white px-3 py-1.5 rounded-md 
+                  text-xs font-semibold tracking-wide backdrop-blur border border-white/10">
+      {data.status}
+    </span>
+
+    <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
+  </div>
+
+  <!-- TITLES -->
+  <div class="mt-6 px-6 max-w-5xl mx-auto">
+    <h1 class="text-4xl font-bold text-white mb-3">{data.title}</h1>
+    <p class="text-lg text-zinc-400 max-w-3xl">{data.summary}</p>
+
+    <div class="flex gap-4 text-sm text-zinc-500 mt-4">
+      <span>{dateRange}</span>
+      {category && <><span>•</span><span>{category}</span></>}
+    </div>
+  </div>
+</section>

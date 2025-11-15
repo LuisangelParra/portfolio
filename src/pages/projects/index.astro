@@ -1,0 +1,16 @@
+---
+import { getCollection } from "astro:content";
+import InfoLayout from "../../layouts/InfoLayout.astro";
+import H1 from "../../components/H1.astro";
+import ProjectsFiltersClient from "../../components/projects/ProjectsFiltersClient.tsx";
+
+const projects = await getCollection("project");
+---
+
+<InfoLayout>
+  <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
+    <H1>Projects</H1>
+
+    <ProjectsFiltersClient projects={projects} client:load />
+  </div>
+</InfoLayout>

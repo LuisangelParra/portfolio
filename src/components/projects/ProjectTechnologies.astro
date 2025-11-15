@@ -1,0 +1,12 @@
+---
+const { technologies } = Astro.props;
+const techs = technologies.slice(0, 3);
+---
+
+<div class="flex flex-wrap gap-2 mb-4">
+  {techs.map((tech: String) => (
+    <span class="px-2 py-1 bg-zinc-800/70 border border-zinc-700/50 text-[11px] text-zinc-300 rounded-md">
+      {tech}
+    </span>
+  ))}
+</div>

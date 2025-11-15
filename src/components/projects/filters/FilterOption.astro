@@ -1,0 +1,23 @@
+---
+interface Props {
+  label: string;
+  value: string;
+  href: string;
+  active?: boolean;
+}
+
+const { label, value, href, active = false } = Astro.props as Props;
+---
+
+<a
+  href={href}
+  class={`block px-3 py-1.5 rounded text-sm transition
+    ${active
+      ? "bg-zinc-700 text-white font-medium"
+      : "text-zinc-300 hover:bg-zinc-800 hover:text-white"
+    }
+  `}
+  data-value={value}
+>
+  {label}
+</a>

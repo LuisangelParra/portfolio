@@ -1,0 +1,16 @@
+---
+import { Image } from "astro:assets";
+
+const { image, title } = Astro.props;
+---
+
+<div class="relative overflow-hidden">
+  <Image
+    src={image.url}
+    alt={image.alt || title}
+    width={800}
+    height={500}
+    class="object-cover w-full h-60 sm:h-56 md:h-60 lg:h-64 transition duration-300 group-hover:scale-105"
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent"></div>
+</div>

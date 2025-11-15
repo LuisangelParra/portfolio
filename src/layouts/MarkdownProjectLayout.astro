@@ -1,0 +1,40 @@
+---
+import ProjectHero from "../components/projects/ProjectHero.astro";
+import ProjectInfoBlock from "../components/projects/ProjectInfoBlock.astro";
+import RelatedPostsList from "../components/projects/RelatedPostsList.astro";
+import InfoLayout from "./InfoLayout.astro";
+
+interface Props {
+  frontmatter: any;
+  relatedPosts: any[];
+}
+
+const { frontmatter, relatedPosts } = Astro.props;
+---
+
+<InfoLayout>
+  <div class="pt-10 pb-20">
+
+    <!-- HERO -->
+    <ProjectHero data={frontmatter.data} />
+
+    <!-- PROJECT INFO BLOCK -->
+    <div class="mt-12 max-w-5xl mx-auto px-6">
+      <ProjectInfoBlock data={frontmatter.data} />
+    </div>
+
+    <!-- MARKDOWN CONTENT -->
+    <article class="mt-16 max-w-3xl mx-auto px-6 prose prose-invert prose-zinc text-zinc-300 leading-relaxed
+                      prose-h2:text-zinc-100 prose-h3:text-zinc-100 prose-p:my-5">
+      <slot />
+    </article>
+
+    <!-- RELATED POSTS -->
+    <section class="mt-20 max-w-5xl mx-auto px-6">
+      <h2 class="text-xl font-semibold text-zinc-100 mb-6">Related Posts</h2>
+
+      <RelatedPostsList posts={relatedPosts} />
+    </section>
+
+  </div>
+</InfoLayout>

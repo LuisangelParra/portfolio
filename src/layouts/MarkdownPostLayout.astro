@@ -1,38 +1,94 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-const { frontmatter } = Astro.props;
+import InfoLayout from './InfoLayout.astro';
+
+interface Props {
+  frontmatter: any;
+  project?: any;
+}
+
+const { frontmatter, project } = Astro.props;
+const d = frontmatter.data ?? frontmatter;
+
+const dateFmt = (date: Date) =>
+  date.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
 ---
-<BaseLayout pageTitle={frontmatter.title}>
-    <p>Published on {frontmatter.pubDate.toLocaleDateString().slice(0, 10)}</p>
-    <p><em>{frontmatter.description}</em></p>
-    <p>Written by {frontmatter.author}</p>
-    <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-    
-    <div class="tags">
-        {frontmatter.tags.map((tag) => (
-        <p class="tag"><a href={`/tags/${tag}`}>{tag}</a></p>
-        ))}
+<InfoLayout>
+  <div class="w-full max-w-4xl mx-auto px-6 py-16">
+
+    <!-- BACK BUTTON -->
+    <div class="mb-10">
+      <a href="/blog" class="text-sm text-zinc-400 hover:text-zinc-200 transition flex items-center gap-1">
+        <span class="text-xl">←</span> Back to Blog
+      </a>
     </div>
 
-    <slot />
-</BaseLayout>
+    <!-- HEADER -->
+    <header class="space-y-4 mb-12 w-full max-w-screen-lg">
+      <h1 class="text-4xl sm:text-5xl font-semibold text-zinc-100 leading-tight">
+        {d.title}
+      </h1>
 
-<style>
-  a {
-    color: #00539F;
-  }
+      {d.summary && (
+        <p class="text-lg text-zinc-400 leading-relaxed">
+          {d.summary}
+        </p>
+      )}
 
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-  }
+      <p class="text-sm text-zinc-500">
+        {dateFmt(d.date)}
+        {d.authors?.length ? ` · ${d.authors[0]}` : ""}
+        {project && (
+          <>
+            {" · "}
+            <a 
+              href={`/projects/${project.data.slug}/`} 
+              class="text-zinc-400 hover:text-zinc-200 underline underline-offset-4 transition"
+            >
+              {project.data.title}
+            </a>
+          </>
+        )}
 
-  .tag {
-    margin: 0.25em;
-    border: dotted 1px #a1a1a1;
-    border-radius: .5em;
-    padding: .5em 1em;
-    font-size: 1.15em;
-    background-color: #F8FCFD;
-  }
-</style>
+      </p>
+
+      {d.categories?.length && (
+        <div class="flex flex-wrap gap-2 pt-2">
+          {d.categories.map((cat : string) => (
+            <span class="px-3 py-1 rounded-full text-xs bg-zinc-800 text-zinc-300">
+              {cat}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {d.tags?.length && (
+        <div class="flex flex-wrap gap-2 pt-1">
+          {d.tags.map((tag : string) => (
+            <span class="px-2 py-0.5 rounded-md text-[11px] bg-zinc-900 text-zinc-500 border border-zinc-800/80">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- MARKDOWN CONTENT -->
+    <article
+      class="prose prose-invert prose-zinc w-full max-w-screen-lg
+            prose-headings:text-zinc-100 prose-headings:font-semibold
+            prose-p:text-zinc-300 prose-li:text-zinc-300 prose-strong:text-zinc-100
+            prose-a:text-zinc-200 prose-a:underline prose-a:underline-offset-2
+            prose-blockquote:border-l-zinc-700 prose-blockquote:text-zinc-400
+            prose-code:text-pink-300 prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-zinc-800
+            prose-hr:border-zinc-700"
+    >
+      <slot />
+    </article>
+
+  </div>
+</InfoLayout>

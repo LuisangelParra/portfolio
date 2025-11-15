@@ -1,0 +1,38 @@
+---
+import clsx from "clsx/lite";
+
+const { slug } = Astro.props;
+const href = `/projects/${slug}/`;
+
+const pathname = Astro.url.pathname;
+---
+
+<a 
+  href={href}
+  class={clsx(
+    "group flex items-center gap-1 text-sm font-medium cursor-pointer transition-all duration-200",
+    pathname === href ? "text-zinc-100" : "text-zinc-300 hover:text-white"
+  )}
+>
+  <span>View Project</span>
+
+  <!-- Arrow icon with the same animation you already use -->
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    class="-rotate-45 group-hover:rotate-0 transition-all duration-300 ease-in-out" 
+    width="16" 
+    height="16" 
+    viewBox="0 0 24 24" 
+    aria-hidden="true"
+  >
+    <title>Arrow Icon</title>
+    <path 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-linecap="round" 
+      stroke-linejoin="round" 
+      stroke-width="1.5" 
+      d="M4 12h2.5M20 12l-6-6m6 6l-6 6m6-6H9.5"
+    />
+  </svg>
+</a>
